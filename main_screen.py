@@ -4,6 +4,7 @@ from kivy.uix.recycleview import RecycleView
 from kivy.uix.button import Button
 from kivy.properties import StringProperty
 from kivy.properties import ObjectProperty
+from data_model import conf
 
 Builder.load_string(
 """
@@ -11,15 +12,10 @@ Builder.load_string(
 <MainScreen>:
     recycle_view: recycle_view
     items_box: items_box
-    background_color: [1,1,1,1]
-    canvas.before:
-        Color:
-            rgba: self.background_color
-            Rectangle:
-                size: self.size
-                pos: self.pos
+    background_normal: 'res/background.png'
     BoxLayout:
         orientation: 'vertical'
+        background_normal: 'res/background.png'
 
         Label:
             text_size: self.size
@@ -42,8 +38,10 @@ Builder.load_string(
             id: recycle_view
             size_hint: 1, 0.84
             viewclass: "ListItem"
+            background_normal: 'res/background.png'
 
             RecycleBoxLayout:
+                background_normal: 'res/background.png'
                 id: items_box
                 orientation: "vertical"
                 default_size_hint: 1, None
@@ -67,23 +65,24 @@ Builder.load_string(
 					pos: self.pos
         
         Widget:
+            background_normal: 'res/background.png'
             size_hint: 1, 0.025
 
 <ListItem@BoxLayout>:
     orientation: "horizontal"
     size_hint: 1, None
-    background_color: ''
+    background_normal: 'res/background.png'
     title: ''
     Label:
         canvas.before:
             Color:
                 rgba: [1,1,1,1]
                 Rectangle:
-                    source: 'shadow.png'
+                    source: 'res/shadow.png'
                     size: self.size
                     pos: self.pos
         text: root.title
-        color: [0,0,0,1]
+        #color: [0,0,0,1]
         size_hint_x: 0.9
         text_size: self.size
         valign: "middle"
@@ -94,9 +93,11 @@ Builder.load_string(
 class MainScreen(Screen, RecycleView):
     recycle_view = ObjectProperty(None)
     items_box = ObjectProperty(None)
-    def __init__(self, **kwargs):
+
+    def __init__(self, lable_text, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        pass
+        for i in range(0,len(lable_text)):
+            self.recycle_view.data.append({'title': lable_text[i]})
 
     def on_leave(self):
         self.recycle_view.data = []

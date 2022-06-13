@@ -5,6 +5,7 @@ class conf:
     def __init__(self):
         self.data = self.set_data()
         self.car_list = self.set_list()
+        self.lable_text = self.set_text()
 
     def set_data(self):
         gsheetkey = "1gqWc2QKkUDG6i88axFP2NC_Xi3rPubsAas9KbY8Jb50"
@@ -23,3 +24,10 @@ class conf:
             new_car = car(num[0], num[1], certificate, organization)
             car_list.append(new_car)
         return car_list
+
+    def set_text(self):
+        lable_text = list()
+        for i in range(0,len(self.car_list)):
+            text = self.car_list[i].organization + ' ' + self.car_list[i].regnum + self.car_list[i].regreg
+            lable_text.append(text)
+        return lable_text
