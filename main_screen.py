@@ -109,10 +109,11 @@ class MainScreen(Screen, RecycleView):
     recycle_view = ObjectProperty(None)
     items_box = ObjectProperty(None)
 
-    def __init__(self, lable_text, **kwargs):
+    def __init__(self, data, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        for i in range(0,len(lable_text)):
-            self.recycle_view.data.append({'title': lable_text[i]})
+        self.data = data
+        for i in range(0,len(data.lable_text)):
+            self.recycle_view.data.append({'title': data.lable_text[i]})
 
     def on_leave(self):
         self.recycle_view.data = []
