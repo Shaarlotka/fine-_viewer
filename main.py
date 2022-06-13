@@ -3,12 +3,12 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 
 from init_screen import InitScreen
 from main_screen import MainScreen
-from data_model import conf
+from data_model import Conf
 
 class FineApp(App):
     def __init__(self, **kwargs):
         super(FineApp, self).__init__(**kwargs)
-        self.data = conf()
+        self.data = Conf()
 
     def build(self):
         sm = ScreenManager()

@@ -4,10 +4,27 @@ from kivy.uix.recycleview import RecycleView
 from kivy.uix.button import Button
 from kivy.properties import StringProperty
 from kivy.properties import ObjectProperty
-from data_model import conf
+from data_model import Conf
+from fine_model import Result
 
 Builder.load_string(
 """
+<MessageBox>:
+    id: massage_box
+    title: 'Результаты проверки'
+    size_hint: 0.8, 0.7
+
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            font_name: "Arial"
+            font_size: '14sp'
+            text: "Результаты проверки"
+        Button:
+            size_hint: 1, 0.2
+            text: 'OK'
+            on_press:
+                root.dismiss()
 
 <MainScreen>:
     recycle_view: recycle_view
@@ -67,6 +84,7 @@ Builder.load_string(
                 font_name: "Candara"
                 italic: True
                 font_size: '18sp'
+                on_press: root.check_cars()
                 color: [0,0,0,1]
                 background_normal: ''
                 background_color: (126/255, 188/255, 137/255, 1)
@@ -108,12 +126,17 @@ Builder.load_string(
 class MainScreen(Screen, RecycleView):
     recycle_view = ObjectProperty(None)
     items_box = ObjectProperty(None)
+    massage_box = ObjectProperty(None)
 
     def __init__(self, data, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
         self.data = data
-        for i in range(0,len(data.lable_text)):
-            self.recycle_view.data.append({'title': data.lable_text[i]})
+        for i in range(0,len(self.data.car_list)):
+            self.recycle_view.data.append({'title': self.data.car_list[i]})
+
+    def check_cars(self):
+        res = Result(self.data)
+        self.massage_box.data.append({'title': res.text})
 
     def on_leave(self):
         self.recycle_view.data = []

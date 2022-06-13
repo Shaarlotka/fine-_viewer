@@ -1,7 +1,7 @@
 import pandas as pd
-from car_model import car
+from car_model import Car
 
-class conf:
+class Conf:
     def __init__(self):
         self.data = self.set_data()
         self.car_list = self.set_list()
@@ -21,7 +21,7 @@ class conf:
             certificate = row.T.T.СТС
             certificate = str(certificate).replace(".0","")
             organization = row.T.T.Организация
-            new_car = car(num[0], num[1], certificate, organization)
+            new_car = Car(num[0], num[1], certificate, organization)
             car_list.append(new_car)
         return car_list
 

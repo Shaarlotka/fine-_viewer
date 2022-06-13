@@ -3,8 +3,6 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.image import Image
 from kivy.lang import Builder
 from kivy.clock import Clock
-from threading import Thread
-from data_model import conf
 
 Builder.load_string(
 """

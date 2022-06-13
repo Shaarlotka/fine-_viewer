@@ -1,4 +1,4 @@
-class car:
+class Car:
     def __init__ (self, regnum, regreg, stsnum, organization):
         self.regnum = regnum
         self.regreg = regreg

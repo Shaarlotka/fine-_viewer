@@ -1,13 +1,30 @@
-from car_model import car
+from car_model import Car
+from data_model import Conf
 import os
 from selenium import webdriver
 import requests
 import json
 
-class fine:
+class Result:
+    def __init__(self, data):
+        self.data = data
+        self.text = self.list_analysis()
+
+    def list_analysis(self):
+        text = ''
+        for car in self.data.car_list:
+            fine = Fines(car)
+            text = text + fine.fines + '\n'
+        if text == '':
+            text = 'Штрафов не найдено'
+        return text
+
+
+class Fines:
     def __init__(self, car):
         self.car = car
         self.reCaptchaToken = ''
+        self.fines = self.parse_req()
         
 
     def get_reCaptchaToken(self):
@@ -61,5 +78,11 @@ class fine:
                 break
 
         result = json.loads(req.text)
+        text = ''
         if len(result['data']) > 0:
-            
+            Total_Fine = 0
+            for inf in result['data']:
+                Total_Fine = Total_Fine + int(inf['Summa'])
+            text = "Авто " + self.car.regnum + self.car.regreg + ' ' +\
+                str(len(result['data'])) + ' штрафа на на сумму ' + Total_Fine + 'руб.'
+        return text
