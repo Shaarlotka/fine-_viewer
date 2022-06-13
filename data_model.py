@@ -28,6 +28,6 @@ class conf:
     def set_text(self):
         lable_text = list()
         for i in range(0,len(self.car_list)):
-            text = self.car_list[i].organization + ' ' + self.car_list[i].regnum + self.car_list[i].regreg
+            text = self.car_list[i].organization + '\n\n' + self.car_list[i].regnum + self.car_list[i].regreg
             lable_text.append(text)
         return lable_text

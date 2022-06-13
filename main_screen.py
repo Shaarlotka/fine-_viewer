@@ -12,15 +12,21 @@ Builder.load_string(
 <MainScreen>:
     recycle_view: recycle_view
     items_box: items_box
-    background_normal: 'res/background.png'
     BoxLayout:
         orientation: 'vertical'
-        background_normal: 'res/background.png'
+        background_normal: ''
+        canvas.before:
+            Color:
+                rgba: [1,1,1,1]
+            Rectangle:
+                size: self.size
+                pos: self.pos
 
         Label:
             text_size: self.size
             valign: 'middle'
-            text: "Name"
+            text: "Транспортные средства"
+            bold: True
             font_name: "Candara"
             padding_x: '16sp'
             font_size: '24sp'
@@ -38,51 +44,60 @@ Builder.load_string(
             id: recycle_view
             size_hint: 1, 0.84
             viewclass: "ListItem"
-            background_normal: 'res/background.png'
 
             RecycleBoxLayout:
-                background_normal: 'res/background.png'
                 id: items_box
                 orientation: "vertical"
                 default_size_hint: 1, None
                 size_hint: 1, None
                 height: self.minimum_height
 
-        Button:
-            text: 'press me'
-            size_hint: 0.9, 0.08
-            pos_hint: {"x":.05, "y":.5}
-            font_name: "Candara"
-            font_size: '18sp'
-            color: [0,0,0,1]
-            background_normal: ''
-            background_color: (126/255, 188/255, 137/255, 1)
-			canvas.before:
-				Color:
-					rgba: self.background_color if self.state=='normal' else [193/255, 219/255, 179/255, 1]
-				Rectangle:
-					size: self.size
-					pos: self.pos
-        
-        Widget:
-            background_normal: 'res/background.png'
-            size_hint: 1, 0.025
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, 0.1
+
+            Widget:
+                size_hint: 1, 0.1
+                background_normal: ''
+
+            Button:
+                text: 'ЗАПРОСИТЬ ПРОВЕРКУ'
+                size_hint: 0.9, 0.85
+                pos_hint: {"x":.05, "y":.5}
+                font_name: "Candara"
+                italic: True
+                font_size: '18sp'
+                color: [0,0,0,1]
+                background_normal: ''
+                background_color: (126/255, 188/255, 137/255, 1)
+                canvas.before:
+                    Color:
+                        rgba: self.background_color if self.state=='normal' else [193/255, 219/255, 179/255, 1]
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            
+            Widget:
+                size_hint: 1, 0.15
+                background_normal: ''
 
 <ListItem@BoxLayout>:
     orientation: "horizontal"
     size_hint: 1, None
-    background_normal: 'res/background.png'
     title: ''
     Label:
+        background_normal: ''
+        font_name: "Arial"
+        font_size: '14sp'
+        padding_x: '30sp'
+        bold: True
         canvas.before:
-            Color:
-                rgba: [1,1,1,1]
-                Rectangle:
-                    source: 'res/shadow.png'
-                    size: self.size
-                    pos: self.pos
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'res/shadow.png'
         text: root.title
-        #color: [0,0,0,1]
+        color: [0,0,0,1]
         size_hint_x: 0.9
         text_size: self.size
         valign: "middle"
