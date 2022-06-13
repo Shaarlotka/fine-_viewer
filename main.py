@@ -7,7 +7,7 @@ from main_screen import MainScreen
 class FineApp(App):
     def build(self):
         sm = ScreenManager()
-        sm.add_widget(InitScreen(name='load'))
+        sm.add_widget(InitScreen(name='loading'))
         sm.add_widget(MainScreen(name='main'))
 
         return sm

@@ -25,22 +25,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
- 
-Builder.load_string("""
-<InitScreen>:
-    AnchorLayout:
-        anchor_x: 'center'
-        anchor_y: 'center'
-        canvas:
-            Color:
-                rgb: [193/255, 219/255, 179/255, 1]
-            Rectangle:
-                pos: self.pos
-                size: self.size
-        Image:
-            source: 'car-wireless.png'
-            size: [200, 200]
-""")
 
 
 class MainApp(App):
